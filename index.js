@@ -40,6 +40,15 @@ async function run() {
       return res.send({success: true, result});
     });
 
+    // Get Bookings For Dashboard
+    app.get('/booking', async (req, res) =>{
+      const patient = req.query.patient;
+      console.log(patient);
+      const query = {patient: patient};
+      const bookings = await bookingCollection.find(query).toArray();
+      res.send(bookings);
+    });
+
     // Available Booking Slot Section
 
     app.get('/available', async (req, res) => {
